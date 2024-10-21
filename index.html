@@ -5,13 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+      
+        #fullscreenBtn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body>
+    <button id="fullscreenBtn">Entrar em Fullscreen</button>
     <div class="video_container">
         <video id="myVideo" autoplay loop muted playsinline>
             <source src="TREINAMENTO E REUNIÕES (3).mp4" type="video/mp4">
         </video>
     </div>
 
+    <script>
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        fullscreenBtn.addEventListener('click', function() {
+            const requestFullscreen = document.documentElement.requestFullscreen || 
+                                      document.documentElement.webkitRequestFullscreen || 
+                                      document.documentElement.mozRequestFullScreen || 
+                                      document.documentElement.msRequestFullscreen;
+
+            if (requestFullscreen) {
+                requestFullscreen.call(document.documentElement);
+            }
+        });
+
+        // Opcional: ocultar o botão quando a tela estiver em fullscreen
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                fullscreenBtn.style.display = 'none';
+            } else {
+                fullscreenBtn.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
+
